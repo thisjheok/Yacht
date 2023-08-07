@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<!--남은 구현 목록-->
+<!--
+족보를 눌렀을 때 다시 누를 수 없게 변경, 그 점수가 총 점수에 합산
+버그수정 족보 누르고 주사위 굴리면 똑같은 수 나옴
+-->
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Yacht!</title>
+    <link rel="stylesheet" href="main.css">
+</head>
+<body>
+    <div>
+        <button class="roll">Roll Dice</button>
+    </div>
+    <p class ="keep"></p>
+    <p class="lastkeep"></p>
+    <button class="btn1 dice">*</button>
+    <button class="btn2 dice">*</button>
+    <button class="btn3 dice">*</button>
+    <button class="btn4 dice">*</button>
+    <button class="btn5 dice">*</button>
+    <br>
+    <br>
+    <div>
+        <table class= "table" border="1">
+            <th class="ones"><button class="ones btn">ones</button></th>
+            <th class="fourofakind"><button class="fourofakind btn">Four of a Kind</button></th>
+            <tr>
+                <td><p class="scones">0</p></td>
+                <td><p class="scfourofakind">0</p></td>
+            </tr>
+            <th class="twos"><button class="twos btn">twos</button></th>
+            <th class="fullhouse"><button class="fullhouse btn">Full House</button></th>
+            <tr>
+                <td><p class="sctwos">0</p></td>
+                <td><p class="scfullhouse">0</p></td>
+            </tr>
+            <th class="threes"><button class="threes btn">threes</button></th>
+            <th class="lilstraight"><button class="lilstraight btn">Little Straight</button></th>
+            <tr>
+                <td><p class="scthrees">0</p></td>
+                <td><p class="sclilstraight">0</p></td>
+            </tr>
+            <th class="fours"><button class="fours btn">fours</button></th>
+            <th class="bigstraight"><button class="bigstraight btn">Big Straight</button></th>
+            <tr>
+                <td><p class="scfours">0</p></td>
+                <td><p class="scbigstraight">0</p></td>
+            </tr>
+            <th class="fives"><button class="fives btn">fives</button></th>
+            <th class="yacht"><button class="yacht btn">Yacht</button></th>
+            <tr>
+                <td><p class="scfives">0</p></td>
+                <td><p class="scyacht">0</p></td>
+            </tr>
+            <th class="sixs"><button class="sixs btn">sixes</button></th>
+            <th class="choice"><button class="choice btn">Choice</button></th>
+            <tr>
+                <td><p class="scsixs">0</p></td>
+                <td><p class="scchoice">0</p></td>
+            </tr>
+            <tr>
+                <td colspan='2'><p class="total">TOTAL</p></td>
+            </tr>
+            <tr>
+                <td colspan='2'><p class="score">0</p></td>
+            </tr>
+        </table>
+    </div>
+    <script src= "script1.js"></script>
+</body>
+</html>

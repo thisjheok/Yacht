@@ -1,0 +1,57 @@
+
+.scones {
+    
+    padding: 0;
+}
+
+table {
+
+}
+
+td {
+    text-align: center;
+}
+
+.btn {
+    background-color: transparent;
+    border: 0px;
+    border-radius: 2px;
+    color: white;
+}
+
+.dice {
+    background-color: white;
+}
+
+.result {
+
+}
+
+.roll {
+    background-color: deepskyblue;
+    border-radius: 3px;
+    color: whitesmoke;
+}
+
+.total {
+    margin: 0px;
+    text-align: left;
+    background-color: gainsboro;
+    color: black;
+}
+
+.score {
+    margin: 0px;
+}
+
+th {
+    background-color: indianred;
+}
+
+.table {
+    border-color: black;
+}
+
+.ones {
+    
+}
