@@ -1,20 +1,16 @@
-//주사위 담을 배열
-let dice = []; 
-
-//주사위 랜덤 부여
-for(var i=0;i<5;i++){
-    dice[i] = Math.floor(Math.random()*6)+1;   
-    }
-//중복체크하고, 중복된 요소를 저장하는 result object
-let result = {};
-    dice.forEach((x) => {
-    result[x] = (result[x] || 0)+1;
-});
-
 //주사위 리롤 할 때 필요한 내용
 let dicelist = [1,2,3,4,5];
 let changedice = [];
 
+var dice = []; 
+//주사위 랜덤 부여
+for(var i=0;i<5;i++){
+        dice[i] = Math.floor(Math.random()*6)+1;   
+        }  
+var result = {};
+        dice.forEach((x) => {
+        result[x] = (result[x] || 0)+1;
+    });
 //리롤 체크할 때 클릭 횟수 변수
 let clickcountDice1 = 0;
 let clickcountDice2 = 0;
@@ -99,7 +95,7 @@ document.querySelector(".btn5").addEventListener("click",function(){
     }
 })
 
-function Sumones(a){
+function Sumones(a,dice){
     var sum=0;
     for(var i=0;i<5;i++){
         if(dice[i]==a){
@@ -109,7 +105,7 @@ function Sumones(a){
     return sum;
 }
 
-function choice(){
+function choice(dice){
     var sum=0;
     for(var i=0;i<5;i++){
         sum+=dice[i];
@@ -148,7 +144,7 @@ function bigStraight(result){
     return bigstraightPoint;
 }
 
-function fullhouse(result){
+function fullhouse(result,dice){
     var fullhousePoint = 0;
     var fcount=0;
     var sum=0;
@@ -194,100 +190,54 @@ function forofakind(result){
 let clickcountRoll = 0;
 
 // 주사위 굴리기 
-document.querySelector(".roll").addEventListener("click",function(){    
-    if(clickcountRoll == 0){
-    document.querySelector(".keep").innerHTML='choose what to keep';
+document.querySelector(".roll").addEventListener("click",function(){
+    
+    if(clickcountRoll<3){
     document.querySelector(".lastkeep").innerHTML=`last keep chance: ${2-clickcountRoll}`;
-    document.querySelector(".btn1").innerHTML=`${dice[0]}`;
-    document.querySelector(".btn2").innerHTML=`${dice[1]}`;
-    document.querySelector(".btn3").innerHTML=`${dice[2]}`;
-    document.querySelector(".btn4").innerHTML=`${dice[3]}`;
-    document.querySelector(".btn5").innerHTML=`${dice[4]}`;
-
-    document.querySelector(".scones").innerHTML=`${Sumones(1)}`;
-    document.querySelector(".sctwos").innerHTML=`${Sumones(2)}`;
-    document.querySelector(".scthrees").innerHTML=`${Sumones(3)}`;
-    document.querySelector(".scfours").innerHTML=`${Sumones(4)}`;
-    document.querySelector(".scfives").innerHTML=`${Sumones(5)}`;
-    document.querySelector(".scsixs").innerHTML=`${Sumones(6)}`;
-    document.querySelector(".scchoice").innerHTML=`${choice(result)}`;
-    document.querySelector(".sclilstraight").innerHTML=`${littleStraight(result)}`;
-    document.querySelector(".scyacht").innerHTML=`${yacht(result)}`;
-    document.querySelector(".scbigstraight").innerHTML=`${bigStraight(result)}`;
-    document.querySelector(".scfullhouse").innerHTML=`${fullhouse(result)}`
-    document.querySelector(".scfourofakind").innerHTML=`${forofakind(result)}`;
-    }else if(clickcountRoll == 1){
+    //주사위 랜덤 부여
     let lastdice = dicelist.filter(x =>!changedice.includes(x));
     for(var i=0;i<lastdice.length;i++){
         let index = lastdice[i]-1;
         dice[index] = Math.floor(Math.random()*6)+1;
-    }   
-    console.log(dice);
-    result = {};
-    dice.forEach((x) => {
-    result[x] = (result[x] || 0)+1;
-    });
-    console.log(result);
-    document.querySelector(".lastkeep").innerHTML=`last keep chance: ${2-clickcountRoll}`;    
-    document.querySelector(".btn1").innerHTML=`${dice[0]}`;
-    document.querySelector(".btn2").innerHTML=`${dice[1]}`;
-    document.querySelector(".btn3").innerHTML=`${dice[2]}`;
-    document.querySelector(".btn4").innerHTML=`${dice[3]}`;
-    document.querySelector(".btn5").innerHTML=`${dice[4]}`;
-    
-    document.querySelector(".scones").innerHTML=`${Sumones(1)}`;
-    document.querySelector(".sctwos").innerHTML=`${Sumones(2)}`;
-    document.querySelector(".scthrees").innerHTML=`${Sumones(3)}`;
-    document.querySelector(".scfours").innerHTML=`${Sumones(4)}`;
-    document.querySelector(".scfives").innerHTML=`${Sumones(5)}`;
-    document.querySelector(".scsixs").innerHTML=`${Sumones(6)}`;
-    document.querySelector(".scchoice").innerHTML=`${choice(result)}`;
-    document.querySelector(".sclilstraight").innerHTML=`${littleStraight(result)}`;
-    document.querySelector(".scyacht").innerHTML=`${yacht(result)}`;
-    document.querySelector(".scbigstraight").innerHTML=`${bigStraight(result)}`;
-    document.querySelector(".scfullhouse").innerHTML=`${fullhouse(result)}`
-    document.querySelector(".scfourofakind").innerHTML=`${forofakind(result)}`;        
-    }else if(clickcountRoll == 2){
-    let lastdice = dicelist.filter(x =>!changedice.includes(x));
-    for(var i=0;i<lastdice.length;i++){
-        let index = lastdice[i]-1;
-        dice[index] = Math.floor(Math.random()*6)+1;
-    }   
-    console.log(dice);
-    result = {};
-    dice.forEach((x) => {
-    result[x] = (result[x] || 0)+1;
-    });
-    console.log(result);
-    document.querySelector(".lastkeep").innerHTML=`last keep chance: ${2-clickcountRoll}`;    
-    document.querySelector(".btn1").innerHTML=`${dice[0]}`;
-    document.querySelector(".btn2").innerHTML=`${dice[1]}`;
-    document.querySelector(".btn3").innerHTML=`${dice[2]}`;
-    document.querySelector(".btn4").innerHTML=`${dice[3]}`;
-    document.querySelector(".btn5").innerHTML=`${dice[4]}`;
-    
-    document.querySelector(".scones").innerHTML=`${Sumones(1)}`;
-    document.querySelector(".sctwos").innerHTML=`${Sumones(2)}`;
-    document.querySelector(".scthrees").innerHTML=`${Sumones(3)}`;
-    document.querySelector(".scfours").innerHTML=`${Sumones(4)}`;
-    document.querySelector(".scfives").innerHTML=`${Sumones(5)}`;
-    document.querySelector(".scsixs").innerHTML=`${Sumones(6)}`;
-    document.querySelector(".scchoice").innerHTML=`${choice(result)}`;
-    document.querySelector(".sclilstraight").innerHTML=`${littleStraight(result)}`;
-    document.querySelector(".scyacht").innerHTML=`${yacht(result)}`;
-    document.querySelector(".scbigstraight").innerHTML=`${bigStraight(result)}`;
-    document.querySelector(".scfullhouse").innerHTML=`${fullhouse(result)}`
-    document.querySelector(".scfourofakind").innerHTML=`${forofakind(result)}`;   
     }
+    //중복체크하고, 중복된 요소를 저장하는 result object
+    result = {};
+    dice.forEach((x) => {
+    result[x] = (result[x] || 0)+1;
+    });
+    }   
+    document.querySelector(".btn1").innerHTML=`${dice[0]}`;
+    document.querySelector(".btn2").innerHTML=`${dice[1]}`;
+    document.querySelector(".btn3").innerHTML=`${dice[2]}`;
+    document.querySelector(".btn4").innerHTML=`${dice[3]}`;
+    document.querySelector(".btn5").innerHTML=`${dice[4]}`;
+    
+    document.querySelector(".scones").innerHTML=`${Sumones(1,dice)}`;
+    document.querySelector(".sctwos").innerHTML=`${Sumones(2,dice)}`;
+    document.querySelector(".scthrees").innerHTML=`${Sumones(3,dice)}`;
+    document.querySelector(".scfours").innerHTML=`${Sumones(4,dice)}`;
+    document.querySelector(".scfives").innerHTML=`${Sumones(5,dice)}`;
+    document.querySelector(".scsixs").innerHTML=`${Sumones(6,dice)}`;
+    document.querySelector(".scchoice").innerHTML=`${choice(dice)}`;
+    document.querySelector(".sclilstraight").innerHTML=`${littleStraight(result)}`;
+    document.querySelector(".scyacht").innerHTML=`${yacht(result)}`;
+    document.querySelector(".scbigstraight").innerHTML=`${bigStraight(result)}`;
+    document.querySelector(".scfullhouse").innerHTML=`${fullhouse(result,dice)}`
+    document.querySelector(".scfourofakind").innerHTML=`${forofakind(result)}`;
     clickcountRoll +=1;
 })
 
+function endmention(){
+    alert("end!");
+}
+
 
 //족보 눌러서 점수 합산
-let total =0;
+let total = 0;
+let clickcountbtn = 0;
 //ones
 document.querySelector(".ones").addEventListener("click",function(){
-    total += Sumones(1);
+    total += Sumones(1,dice);
     document.querySelector(".score").innerHTML=`${total}`;
     document.querySelector(".ones").style.backgroundColor = 'blue';
     clickcountRoll = 0;
@@ -297,110 +247,16 @@ document.querySelector(".ones").addEventListener("click",function(){
     clickcountDice4 = 0;
     clickcountDice5 = 0;
     for(var i=0;i<5;i++){
-    document.querySelectorAll(".dice")[i].innerHTML="*";
     document.querySelectorAll(".dice")[i].style.backgroundColor = 'white';
     }
-    document.querySelector(".roll").addEventListener("click",function(clickcountRoll){
-    //주사위 담을 배열
-    dice = []; 
-    //주사위 랜덤 부여
-    for(var i=0;i<5;i++){
-        dice[i] = Math.floor(Math.random()*6)+1;   
-        }
-    //중복체크하고, 중복된 요소를 저장하는 result object
-    result = {};
-    dice.forEach((x) => {result[x] = (result[x] || 0)+1;});
-    if(clickcountRoll == 0){
-    document.querySelector(".keep").innerHTML='choose what to keep';
-    document.querySelector(".lastkeep").innerHTML=`last keep chance: ${2-clickcountRoll}`;
-    document.querySelector(".btn1").innerHTML=`${dice[0]}`;
-    document.querySelector(".btn2").innerHTML=`${dice[1]}`;
-    document.querySelector(".btn3").innerHTML=`${dice[2]}`;
-    document.querySelector(".btn4").innerHTML=`${dice[3]}`;
-    document.querySelector(".btn5").innerHTML=`${dice[4]}`;
-
-    document.querySelector(".scones").innerHTML=`${Sumones(1)}`;
-    document.querySelector(".sctwos").innerHTML=`${Sumones(2)}`;
-    document.querySelector(".scthrees").innerHTML=`${Sumones(3)}`;
-    document.querySelector(".scfours").innerHTML=`${Sumones(4)}`;
-    document.querySelector(".scfives").innerHTML=`${Sumones(5)}`;
-    document.querySelector(".scsixs").innerHTML=`${Sumones(6)}`;
-    document.querySelector(".scchoice").innerHTML=`${choice(result)}`;
-    document.querySelector(".sclilstraight").innerHTML=`${littleStraight(result)}`;
-    document.querySelector(".scyacht").innerHTML=`${yacht(result)}`;
-    document.querySelector(".scbigstraight").innerHTML=`${bigStraight(result)}`;
-    document.querySelector(".scfullhouse").innerHTML=`${fullhouse(result)}`
-    document.querySelector(".scfourofakind").innerHTML=`${forofakind(result)}`;
-    }else if(clickcountRoll == 1){
-    let lastdice = dicelist.filter(x =>!changedice.includes(x));
-    for(var i=0;i<lastdice.length;i++){
-        let index = lastdice[i]-1;
-        dice[index] = Math.floor(Math.random()*6)+1;
-    }   
-    console.log(dice);
-    result = {};
-    dice.forEach((x) => {
-    result[x] = (result[x] || 0)+1;
-    });
-    console.log(result);
-    document.querySelector(".lastkeep").innerHTML=`last keep chance: ${2-clickcountRoll}`;    
-    document.querySelector(".btn1").innerHTML=`${dice[0]}`;
-    document.querySelector(".btn2").innerHTML=`${dice[1]}`;
-    document.querySelector(".btn3").innerHTML=`${dice[2]}`;
-    document.querySelector(".btn4").innerHTML=`${dice[3]}`;
-    document.querySelector(".btn5").innerHTML=`${dice[4]}`;
-    
-    document.querySelector(".scones").innerHTML=`${Sumones(1)}`;
-    document.querySelector(".sctwos").innerHTML=`${Sumones(2)}`;
-    document.querySelector(".scthrees").innerHTML=`${Sumones(3)}`;
-    document.querySelector(".scfours").innerHTML=`${Sumones(4)}`;
-    document.querySelector(".scfives").innerHTML=`${Sumones(5)}`;
-    document.querySelector(".scsixs").innerHTML=`${Sumones(6)}`;
-    document.querySelector(".scchoice").innerHTML=`${choice(result)}`;
-    document.querySelector(".sclilstraight").innerHTML=`${littleStraight(result)}`;
-    document.querySelector(".scyacht").innerHTML=`${yacht(result)}`;
-    document.querySelector(".scbigstraight").innerHTML=`${bigStraight(result)}`;
-    document.querySelector(".scfullhouse").innerHTML=`${fullhouse(result)}`
-    document.querySelector(".scfourofakind").innerHTML=`${forofakind(result)}`;        
-    }else if(clickcountRoll == 2){
-    let lastdice = dicelist.filter(x =>!changedice.includes(x));
-    for(var i=0;i<lastdice.length;i++){
-        let index = lastdice[i]-1;
-        dice[index] = Math.floor(Math.random()*6)+1;
-    }   
-    console.log(dice);
-    result = {};
-    dice.forEach((x) => {
-    result[x] = (result[x] || 0)+1;
-    });
-    console.log(result);
-    document.querySelector(".lastkeep").innerHTML=`last keep chance: ${2-clickcountRoll}`;    
-    document.querySelector(".btn1").innerHTML=`${dice[0]}`;
-    document.querySelector(".btn2").innerHTML=`${dice[1]}`;
-    document.querySelector(".btn3").innerHTML=`${dice[2]}`;
-    document.querySelector(".btn4").innerHTML=`${dice[3]}`;
-    document.querySelector(".btn5").innerHTML=`${dice[4]}`;
-    
-    document.querySelector(".scones").innerHTML=`${Sumones(1)}`;
-    document.querySelector(".sctwos").innerHTML=`${Sumones(2)}`;
-    document.querySelector(".scthrees").innerHTML=`${Sumones(3)}`;
-    document.querySelector(".scfours").innerHTML=`${Sumones(4)}`;
-    document.querySelector(".scfives").innerHTML=`${Sumones(5)}`;
-    document.querySelector(".scsixs").innerHTML=`${Sumones(6)}`;
-    document.querySelector(".scchoice").innerHTML=`${choice(result)}`;
-    document.querySelector(".sclilstraight").innerHTML=`${littleStraight(result)}`;
-    document.querySelector(".scyacht").innerHTML=`${yacht(result)}`;
-    document.querySelector(".scbigstraight").innerHTML=`${bigStraight(result)}`;
-    document.querySelector(".scfullhouse").innerHTML=`${fullhouse(result)}`
-    document.querySelector(".scfourofakind").innerHTML=`${forofakind(result)}`;   
-    }
-    clickcountRoll +=1;
-})
+    clickcountbtn ++;
+    if(clickcountbtn == 12){
+    endmention();
+}
 },{ once : true })
 
-//twos
 document.querySelector(".twos").addEventListener("click",function(){
-    total += Sumones(2);
+    total += Sumones(2,dice);
     document.querySelector(".score").innerHTML=`${total}`;
     document.querySelector(".twos").style.backgroundColor = 'blue';
     clickcountRoll = 0;
@@ -409,120 +265,17 @@ document.querySelector(".twos").addEventListener("click",function(){
     clickcountDice3 = 0;
     clickcountDice4 = 0;
     clickcountDice5 = 0;
-    //주사위 담을 배열
-    dice = []; 
-    //주사위 랜덤 부여
     for(var i=0;i<5;i++){
-        dice[i] = Math.floor(Math.random()*6)+1;   
-        }
-    //중복체크하고, 중복된 요소를 저장하는 result object
-    result = {};
-    dice.forEach((x) => {result[x] = (result[x] || 0)+1;});
-    for(var i=0;i<5;i++){
-    document.querySelectorAll(".dice")[i].innerHTML="*";
     document.querySelectorAll(".dice")[i].style.backgroundColor = 'white';
     }
-    document.querySelector(".roll").addEventListener("click",function(clickcountRoll){
-    //주사위 담을 배열
-    dice = []; 
-    //주사위 랜덤 부여
-    for(var i=0;i<5;i++){
-        dice[i] = Math.floor(Math.random()*6)+1;   
-        }
-    //중복체크하고, 중복된 요소를 저장하는 result object
-    result = {};
-    dice.forEach((x) => {result[x] = (result[x] || 0)+1;});
-    if(clickcountRoll == 0){
-    document.querySelector(".keep").innerHTML='choose what to keep';
-    document.querySelector(".lastkeep").innerHTML=`last keep chance: ${2-clickcountRoll}`;
-    document.querySelector(".btn1").innerHTML=`${dice[0]}`;
-    document.querySelector(".btn2").innerHTML=`${dice[1]}`;
-    document.querySelector(".btn3").innerHTML=`${dice[2]}`;
-    document.querySelector(".btn4").innerHTML=`${dice[3]}`;
-    document.querySelector(".btn5").innerHTML=`${dice[4]}`;
-
-    document.querySelector(".scones").innerHTML=`${Sumones(1)}`;
-    document.querySelector(".sctwos").innerHTML=`${Sumones(2)}`;
-    document.querySelector(".scthrees").innerHTML=`${Sumones(3)}`;
-    document.querySelector(".scfours").innerHTML=`${Sumones(4)}`;
-    document.querySelector(".scfives").innerHTML=`${Sumones(5)}`;
-    document.querySelector(".scsixs").innerHTML=`${Sumones(6)}`;
-    document.querySelector(".scchoice").innerHTML=`${choice(result)}`;
-    document.querySelector(".sclilstraight").innerHTML=`${littleStraight(result)}`;
-    document.querySelector(".scyacht").innerHTML=`${yacht(result)}`;
-    document.querySelector(".scbigstraight").innerHTML=`${bigStraight(result)}`;
-    document.querySelector(".scfullhouse").innerHTML=`${fullhouse(result)}`
-    document.querySelector(".scfourofakind").innerHTML=`${forofakind(result)}`;
-    }else if(clickcountRoll == 1){
-    let lastdice = dicelist.filter(x =>!changedice.includes(x));
-    for(var i=0;i<lastdice.length;i++){
-        let index = lastdice[i]-1;
-        dice[index] = Math.floor(Math.random()*6)+1;
-    }   
-    console.log(dice);
-    result = {};
-    dice.forEach((x) => {
-    result[x] = (result[x] || 0)+1;
-    });
-    console.log(result);
-    document.querySelector(".lastkeep").innerHTML=`last keep chance: ${2-clickcountRoll}`;    
-    document.querySelector(".btn1").innerHTML=`${dice[0]}`;
-    document.querySelector(".btn2").innerHTML=`${dice[1]}`;
-    document.querySelector(".btn3").innerHTML=`${dice[2]}`;
-    document.querySelector(".btn4").innerHTML=`${dice[3]}`;
-    document.querySelector(".btn5").innerHTML=`${dice[4]}`;
-    
-    document.querySelector(".scones").innerHTML=`${Sumones(1)}`;
-    document.querySelector(".sctwos").innerHTML=`${Sumones(2)}`;
-    document.querySelector(".scthrees").innerHTML=`${Sumones(3)}`;
-    document.querySelector(".scfours").innerHTML=`${Sumones(4)}`;
-    document.querySelector(".scfives").innerHTML=`${Sumones(5)}`;
-    document.querySelector(".scsixs").innerHTML=`${Sumones(6)}`;
-    document.querySelector(".scchoice").innerHTML=`${choice(result)}`;
-    document.querySelector(".sclilstraight").innerHTML=`${littleStraight(result)}`;
-    document.querySelector(".scyacht").innerHTML=`${yacht(result)}`;
-    document.querySelector(".scbigstraight").innerHTML=`${bigStraight(result)}`;
-    document.querySelector(".scfullhouse").innerHTML=`${fullhouse(result)}`
-    document.querySelector(".scfourofakind").innerHTML=`${forofakind(result)}`;        
-    }else if(clickcountRoll == 2){
-    let lastdice = dicelist.filter(x =>!changedice.includes(x));
-    for(var i=0;i<lastdice.length;i++){
-        let index = lastdice[i]-1;
-        dice[index] = Math.floor(Math.random()*6)+1;
-    }   
-    console.log(dice);
-    result = {};
-    dice.forEach((x) => {
-    result[x] = (result[x] || 0)+1;
-    });
-    console.log(result);
-    document.querySelector(".lastkeep").innerHTML=`last keep chance: ${2-clickcountRoll}`;    
-    document.querySelector(".btn1").innerHTML=`${dice[0]}`;
-    document.querySelector(".btn2").innerHTML=`${dice[1]}`;
-    document.querySelector(".btn3").innerHTML=`${dice[2]}`;
-    document.querySelector(".btn4").innerHTML=`${dice[3]}`;
-    document.querySelector(".btn5").innerHTML=`${dice[4]}`;
-    
-    document.querySelector(".scones").innerHTML=`${Sumones(1)}`;
-    document.querySelector(".sctwos").innerHTML=`${Sumones(2)}`;
-    document.querySelector(".scthrees").innerHTML=`${Sumones(3)}`;
-    document.querySelector(".scfours").innerHTML=`${Sumones(4)}`;
-    document.querySelector(".scfives").innerHTML=`${Sumones(5)}`;
-    document.querySelector(".scsixs").innerHTML=`${Sumones(6)}`;
-    document.querySelector(".scchoice").innerHTML=`${choice(result)}`;
-    document.querySelector(".sclilstraight").innerHTML=`${littleStraight(result)}`;
-    document.querySelector(".scyacht").innerHTML=`${yacht(result)}`;
-    document.querySelector(".scbigstraight").innerHTML=`${bigStraight(result)}`;
-    document.querySelector(".scfullhouse").innerHTML=`${fullhouse(result)}`
-    document.querySelector(".scfourofakind").innerHTML=`${forofakind(result)}`;   
-    }
-    clickcountRoll +=1;
-})
+    clickcountbtn ++;
+    if(clickcountbtn == 12){
+    endmention()
+}
 },{ once : true })
 
-//threes
 document.querySelector(".threes").addEventListener("click",function(){
-    total += Sumones(3);
+    total += Sumones(3,dice);
     document.querySelector(".score").innerHTML=`${total}`;
     document.querySelector(".threes").style.backgroundColor = 'blue';
     clickcountRoll = 0;
@@ -531,120 +284,17 @@ document.querySelector(".threes").addEventListener("click",function(){
     clickcountDice3 = 0;
     clickcountDice4 = 0;
     clickcountDice5 = 0;
-    //주사위 담을 배열
-    dice = []; 
-    //주사위 랜덤 부여
     for(var i=0;i<5;i++){
-        dice[i] = Math.floor(Math.random()*6)+1;   
-        }
-    //중복체크하고, 중복된 요소를 저장하는 result object
-    result = {};
-    dice.forEach((x) => {result[x] = (result[x] || 0)+1;});
-    for(var i=0;i<5;i++){
-    document.querySelectorAll(".dice")[i].innerHTML="*";
     document.querySelectorAll(".dice")[i].style.backgroundColor = 'white';
     }
-    document.querySelector(".roll").addEventListener("click",function(clickcountRoll){    
-    if(clickcountRoll == 0){
-            //주사위 담을 배열
-    dice = []; 
-    //주사위 랜덤 부여
-    for(var i=0;i<5;i++){
-        dice[i] = Math.floor(Math.random()*6)+1;   
-        }
-    //중복체크하고, 중복된 요소를 저장하는 result object
-    result = {};
-    dice.forEach((x) => {result[x] = (result[x] || 0)+1;});
-    document.querySelector(".keep").innerHTML='choose what to keep';
-    document.querySelector(".lastkeep").innerHTML=`last keep chance: ${2-clickcountRoll}`;
-    document.querySelector(".btn1").innerHTML=`${dice[0]}`;
-    document.querySelector(".btn2").innerHTML=`${dice[1]}`;
-    document.querySelector(".btn3").innerHTML=`${dice[2]}`;
-    document.querySelector(".btn4").innerHTML=`${dice[3]}`;
-    document.querySelector(".btn5").innerHTML=`${dice[4]}`;
-
-    document.querySelector(".scones").innerHTML=`${Sumones(1)}`;
-    document.querySelector(".sctwos").innerHTML=`${Sumones(2)}`;
-    document.querySelector(".scthrees").innerHTML=`${Sumones(3)}`;
-    document.querySelector(".scfours").innerHTML=`${Sumones(4)}`;
-    document.querySelector(".scfives").innerHTML=`${Sumones(5)}`;
-    document.querySelector(".scsixs").innerHTML=`${Sumones(6)}`;
-    document.querySelector(".scchoice").innerHTML=`${choice(result)}`;
-    document.querySelector(".sclilstraight").innerHTML=`${littleStraight(result)}`;
-    document.querySelector(".scyacht").innerHTML=`${yacht(result)}`;
-    document.querySelector(".scbigstraight").innerHTML=`${bigStraight(result)}`;
-    document.querySelector(".scfullhouse").innerHTML=`${fullhouse(result)}`
-    document.querySelector(".scfourofakind").innerHTML=`${forofakind(result)}`;
-    }else if(clickcountRoll == 1){
-    let lastdice = dicelist.filter(x =>!changedice.includes(x));
-    for(var i=0;i<lastdice.length;i++){
-        let index = lastdice[i]-1;
-        dice[index] = Math.floor(Math.random()*6)+1;
-    }   
-    console.log(dice);
-    result = {};
-    dice.forEach((x) => {
-    result[x] = (result[x] || 0)+1;
-    });
-    console.log(result);
-    document.querySelector(".lastkeep").innerHTML=`last keep chance: ${2-clickcountRoll}`;    
-    document.querySelector(".btn1").innerHTML=`${dice[0]}`;
-    document.querySelector(".btn2").innerHTML=`${dice[1]}`;
-    document.querySelector(".btn3").innerHTML=`${dice[2]}`;
-    document.querySelector(".btn4").innerHTML=`${dice[3]}`;
-    document.querySelector(".btn5").innerHTML=`${dice[4]}`;
-    
-    document.querySelector(".scones").innerHTML=`${Sumones(1)}`;
-    document.querySelector(".sctwos").innerHTML=`${Sumones(2)}`;
-    document.querySelector(".scthrees").innerHTML=`${Sumones(3)}`;
-    document.querySelector(".scfours").innerHTML=`${Sumones(4)}`;
-    document.querySelector(".scfives").innerHTML=`${Sumones(5)}`;
-    document.querySelector(".scsixs").innerHTML=`${Sumones(6)}`;
-    document.querySelector(".scchoice").innerHTML=`${choice(result)}`;
-    document.querySelector(".sclilstraight").innerHTML=`${littleStraight(result)}`;
-    document.querySelector(".scyacht").innerHTML=`${yacht(result)}`;
-    document.querySelector(".scbigstraight").innerHTML=`${bigStraight(result)}`;
-    document.querySelector(".scfullhouse").innerHTML=`${fullhouse(result)}`
-    document.querySelector(".scfourofakind").innerHTML=`${forofakind(result)}`;        
-    }else if(clickcountRoll == 2){
-    let lastdice = dicelist.filter(x =>!changedice.includes(x));
-    for(var i=0;i<lastdice.length;i++){
-        let index = lastdice[i]-1;
-        dice[index] = Math.floor(Math.random()*6)+1;
-    }   
-    console.log(dice);
-    result = {};
-    dice.forEach((x) => {
-    result[x] = (result[x] || 0)+1;
-    });
-    console.log(result);
-    document.querySelector(".lastkeep").innerHTML=`last keep chance: ${2-clickcountRoll}`;    
-    document.querySelector(".btn1").innerHTML=`${dice[0]}`;
-    document.querySelector(".btn2").innerHTML=`${dice[1]}`;
-    document.querySelector(".btn3").innerHTML=`${dice[2]}`;
-    document.querySelector(".btn4").innerHTML=`${dice[3]}`;
-    document.querySelector(".btn5").innerHTML=`${dice[4]}`;
-    
-    document.querySelector(".scones").innerHTML=`${Sumones(1)}`;
-    document.querySelector(".sctwos").innerHTML=`${Sumones(2)}`;
-    document.querySelector(".scthrees").innerHTML=`${Sumones(3)}`;
-    document.querySelector(".scfours").innerHTML=`${Sumones(4)}`;
-    document.querySelector(".scfives").innerHTML=`${Sumones(5)}`;
-    document.querySelector(".scsixs").innerHTML=`${Sumones(6)}`;
-    document.querySelector(".scchoice").innerHTML=`${choice(result)}`;
-    document.querySelector(".sclilstraight").innerHTML=`${littleStraight(result)}`;
-    document.querySelector(".scyacht").innerHTML=`${yacht(result)}`;
-    document.querySelector(".scbigstraight").innerHTML=`${bigStraight(result)}`;
-    document.querySelector(".scfullhouse").innerHTML=`${fullhouse(result)}`
-    document.querySelector(".scfourofakind").innerHTML=`${forofakind(result)}`;   
-    }
-    clickcountRoll +=1;
-})
+    clickcountbtn ++;
+    if(clickcountbtn == 12){
+    endmention();
+}
 },{ once : true })
 
-//fours
 document.querySelector(".fours").addEventListener("click",function(){
-    total += Sumones(4);
+    total += Sumones(4,dice);
     document.querySelector(".score").innerHTML=`${total}`;
     document.querySelector(".fours").style.backgroundColor = 'blue';
     clickcountRoll = 0;
@@ -653,120 +303,17 @@ document.querySelector(".fours").addEventListener("click",function(){
     clickcountDice3 = 0;
     clickcountDice4 = 0;
     clickcountDice5 = 0;
-    //주사위 담을 배열
-    dice = []; 
-    //주사위 랜덤 부여
     for(var i=0;i<5;i++){
-        dice[i] = Math.floor(Math.random()*6)+1;   
-        }
-    //중복체크하고, 중복된 요소를 저장하는 result object
-    result = {};
-    dice.forEach((x) => {result[x] = (result[x] || 0)+1;});
-    for(var i=0;i<5;i++){
-    document.querySelectorAll(".dice")[i].innerHTML="*";
     document.querySelectorAll(".dice")[i].style.backgroundColor = 'white';
     }
-    document.querySelector(".roll").addEventListener("click",function(clickcountRoll){    
-    if(clickcountRoll == 0){
-            //주사위 담을 배열
-    dice = []; 
-    //주사위 랜덤 부여
-    for(var i=0;i<5;i++){
-        dice[i] = Math.floor(Math.random()*6)+1;   
-        }
-    //중복체크하고, 중복된 요소를 저장하는 result object
-    result = {};
-    dice.forEach((x) => {result[x] = (result[x] || 0)+1;});
-    document.querySelector(".keep").innerHTML='choose what to keep';
-    document.querySelector(".lastkeep").innerHTML=`last keep chance: ${2-clickcountRoll}`;
-    document.querySelector(".btn1").innerHTML=`${dice[0]}`;
-    document.querySelector(".btn2").innerHTML=`${dice[1]}`;
-    document.querySelector(".btn3").innerHTML=`${dice[2]}`;
-    document.querySelector(".btn4").innerHTML=`${dice[3]}`;
-    document.querySelector(".btn5").innerHTML=`${dice[4]}`;
-
-    document.querySelector(".scones").innerHTML=`${Sumones(1)}`;
-    document.querySelector(".sctwos").innerHTML=`${Sumones(2)}`;
-    document.querySelector(".scthrees").innerHTML=`${Sumones(3)}`;
-    document.querySelector(".scfours").innerHTML=`${Sumones(4)}`;
-    document.querySelector(".scfives").innerHTML=`${Sumones(5)}`;
-    document.querySelector(".scsixs").innerHTML=`${Sumones(6)}`;
-    document.querySelector(".scchoice").innerHTML=`${choice(result)}`;
-    document.querySelector(".sclilstraight").innerHTML=`${littleStraight(result)}`;
-    document.querySelector(".scyacht").innerHTML=`${yacht(result)}`;
-    document.querySelector(".scbigstraight").innerHTML=`${bigStraight(result)}`;
-    document.querySelector(".scfullhouse").innerHTML=`${fullhouse(result)}`
-    document.querySelector(".scfourofakind").innerHTML=`${forofakind(result)}`;
-    }else if(clickcountRoll == 1){
-    let lastdice = dicelist.filter(x =>!changedice.includes(x));
-    for(var i=0;i<lastdice.length;i++){
-        let index = lastdice[i]-1;
-        dice[index] = Math.floor(Math.random()*6)+1;
-    }   
-    console.log(dice);
-    result = {};
-    dice.forEach((x) => {
-    result[x] = (result[x] || 0)+1;
-    });
-    console.log(result);
-    document.querySelector(".lastkeep").innerHTML=`last keep chance: ${2-clickcountRoll}`;    
-    document.querySelector(".btn1").innerHTML=`${dice[0]}`;
-    document.querySelector(".btn2").innerHTML=`${dice[1]}`;
-    document.querySelector(".btn3").innerHTML=`${dice[2]}`;
-    document.querySelector(".btn4").innerHTML=`${dice[3]}`;
-    document.querySelector(".btn5").innerHTML=`${dice[4]}`;
-    
-    document.querySelector(".scones").innerHTML=`${Sumones(1)}`;
-    document.querySelector(".sctwos").innerHTML=`${Sumones(2)}`;
-    document.querySelector(".scthrees").innerHTML=`${Sumones(3)}`;
-    document.querySelector(".scfours").innerHTML=`${Sumones(4)}`;
-    document.querySelector(".scfives").innerHTML=`${Sumones(5)}`;
-    document.querySelector(".scsixs").innerHTML=`${Sumones(6)}`;
-    document.querySelector(".scchoice").innerHTML=`${choice(result)}`;
-    document.querySelector(".sclilstraight").innerHTML=`${littleStraight(result)}`;
-    document.querySelector(".scyacht").innerHTML=`${yacht(result)}`;
-    document.querySelector(".scbigstraight").innerHTML=`${bigStraight(result)}`;
-    document.querySelector(".scfullhouse").innerHTML=`${fullhouse(result)}`
-    document.querySelector(".scfourofakind").innerHTML=`${forofakind(result)}`;        
-    }else if(clickcountRoll == 2){
-    let lastdice = dicelist.filter(x =>!changedice.includes(x));
-    for(var i=0;i<lastdice.length;i++){
-        let index = lastdice[i]-1;
-        dice[index] = Math.floor(Math.random()*6)+1;
-    }   
-    console.log(dice);
-    result = {};
-    dice.forEach((x) => {
-    result[x] = (result[x] || 0)+1;
-    });
-    console.log(result);
-    document.querySelector(".lastkeep").innerHTML=`last keep chance: ${2-clickcountRoll}`;    
-    document.querySelector(".btn1").innerHTML=`${dice[0]}`;
-    document.querySelector(".btn2").innerHTML=`${dice[1]}`;
-    document.querySelector(".btn3").innerHTML=`${dice[2]}`;
-    document.querySelector(".btn4").innerHTML=`${dice[3]}`;
-    document.querySelector(".btn5").innerHTML=`${dice[4]}`;
-    
-    document.querySelector(".scones").innerHTML=`${Sumones(1)}`;
-    document.querySelector(".sctwos").innerHTML=`${Sumones(2)}`;
-    document.querySelector(".scthrees").innerHTML=`${Sumones(3)}`;
-    document.querySelector(".scfours").innerHTML=`${Sumones(4)}`;
-    document.querySelector(".scfives").innerHTML=`${Sumones(5)}`;
-    document.querySelector(".scsixs").innerHTML=`${Sumones(6)}`;
-    document.querySelector(".scchoice").innerHTML=`${choice(result)}`;
-    document.querySelector(".sclilstraight").innerHTML=`${littleStraight(result)}`;
-    document.querySelector(".scyacht").innerHTML=`${yacht(result)}`;
-    document.querySelector(".scbigstraight").innerHTML=`${bigStraight(result)}`;
-    document.querySelector(".scfullhouse").innerHTML=`${fullhouse(result)}`
-    document.querySelector(".scfourofakind").innerHTML=`${forofakind(result)}`;   
-    }
-    clickcountRoll +=1;
-})
+    clickcountbtn ++;
+    if(clickcountbtn == 12){
+    endmention();
+}
 },{ once : true })
 
-//fives
 document.querySelector(".fives").addEventListener("click",function(){
-    total += Sumones(5);
+    total += Sumones(5,dice);
     document.querySelector(".score").innerHTML=`${total}`;
     document.querySelector(".fives").style.backgroundColor = 'blue';
     clickcountRoll = 0;
@@ -775,111 +322,17 @@ document.querySelector(".fives").addEventListener("click",function(){
     clickcountDice3 = 0;
     clickcountDice4 = 0;
     clickcountDice5 = 0;
-    //주사위 담을 배열
-    dice = []; 
-    //주사위 랜덤 부여
     for(var i=0;i<5;i++){
-        dice[i] = Math.floor(Math.random()*6)+1;   
-        }
-    //중복체크하고, 중복된 요소를 저장하는 result object
-    result = {};
-    dice.forEach((x) => {result[x] = (result[x] || 0)+1;});
-    for(var i=0;i<5;i++){
-    document.querySelectorAll(".dice")[i].innerHTML="*";
     document.querySelectorAll(".dice")[i].style.backgroundColor = 'white';
     }
-    document.querySelector(".roll").addEventListener("click",function(clickcountRoll){    
-    if(clickcountRoll == 0){
-    document.querySelector(".keep").innerHTML='choose what to keep';
-    document.querySelector(".lastkeep").innerHTML=`last keep chance: ${2-clickcountRoll}`;
-    document.querySelector(".btn1").innerHTML=`${dice[0]}`;
-    document.querySelector(".btn2").innerHTML=`${dice[1]}`;
-    document.querySelector(".btn3").innerHTML=`${dice[2]}`;
-    document.querySelector(".btn4").innerHTML=`${dice[3]}`;
-    document.querySelector(".btn5").innerHTML=`${dice[4]}`;
-
-    document.querySelector(".scones").innerHTML=`${Sumones(1)}`;
-    document.querySelector(".sctwos").innerHTML=`${Sumones(2)}`;
-    document.querySelector(".scthrees").innerHTML=`${Sumones(3)}`;
-    document.querySelector(".scfours").innerHTML=`${Sumones(4)}`;
-    document.querySelector(".scfives").innerHTML=`${Sumones(5)}`;
-    document.querySelector(".scsixs").innerHTML=`${Sumones(6)}`;
-    document.querySelector(".scchoice").innerHTML=`${choice(result)}`;
-    document.querySelector(".sclilstraight").innerHTML=`${littleStraight(result)}`;
-    document.querySelector(".scyacht").innerHTML=`${yacht(result)}`;
-    document.querySelector(".scbigstraight").innerHTML=`${bigStraight(result)}`;
-    document.querySelector(".scfullhouse").innerHTML=`${fullhouse(result)}`
-    document.querySelector(".scfourofakind").innerHTML=`${forofakind(result)}`;
-    }else if(clickcountRoll == 1){
-    let lastdice = dicelist.filter(x =>!changedice.includes(x));
-    for(var i=0;i<lastdice.length;i++){
-        let index = lastdice[i]-1;
-        dice[index] = Math.floor(Math.random()*6)+1;
-    }   
-    console.log(dice);
-    result = {};
-    dice.forEach((x) => {
-    result[x] = (result[x] || 0)+1;
-    });
-    console.log(result);
-    document.querySelector(".lastkeep").innerHTML=`last keep chance: ${2-clickcountRoll}`;    
-    document.querySelector(".btn1").innerHTML=`${dice[0]}`;
-    document.querySelector(".btn2").innerHTML=`${dice[1]}`;
-    document.querySelector(".btn3").innerHTML=`${dice[2]}`;
-    document.querySelector(".btn4").innerHTML=`${dice[3]}`;
-    document.querySelector(".btn5").innerHTML=`${dice[4]}`;
-    
-    document.querySelector(".scones").innerHTML=`${Sumones(1)}`;
-    document.querySelector(".sctwos").innerHTML=`${Sumones(2)}`;
-    document.querySelector(".scthrees").innerHTML=`${Sumones(3)}`;
-    document.querySelector(".scfours").innerHTML=`${Sumones(4)}`;
-    document.querySelector(".scfives").innerHTML=`${Sumones(5)}`;
-    document.querySelector(".scsixs").innerHTML=`${Sumones(6)}`;
-    document.querySelector(".scchoice").innerHTML=`${choice(result)}`;
-    document.querySelector(".sclilstraight").innerHTML=`${littleStraight(result)}`;
-    document.querySelector(".scyacht").innerHTML=`${yacht(result)}`;
-    document.querySelector(".scbigstraight").innerHTML=`${bigStraight(result)}`;
-    document.querySelector(".scfullhouse").innerHTML=`${fullhouse(result)}`
-    document.querySelector(".scfourofakind").innerHTML=`${forofakind(result)}`;        
-    }else if(clickcountRoll == 2){
-    let lastdice = dicelist.filter(x =>!changedice.includes(x));
-    for(var i=0;i<lastdice.length;i++){
-        let index = lastdice[i]-1;
-        dice[index] = Math.floor(Math.random()*6)+1;
-    }   
-    console.log(dice);
-    result = {};
-    dice.forEach((x) => {
-    result[x] = (result[x] || 0)+1;
-    });
-    console.log(result);
-    document.querySelector(".lastkeep").innerHTML=`last keep chance: ${2-clickcountRoll}`;    
-    document.querySelector(".btn1").innerHTML=`${dice[0]}`;
-    document.querySelector(".btn2").innerHTML=`${dice[1]}`;
-    document.querySelector(".btn3").innerHTML=`${dice[2]}`;
-    document.querySelector(".btn4").innerHTML=`${dice[3]}`;
-    document.querySelector(".btn5").innerHTML=`${dice[4]}`;
-    
-    document.querySelector(".scones").innerHTML=`${Sumones(1)}`;
-    document.querySelector(".sctwos").innerHTML=`${Sumones(2)}`;
-    document.querySelector(".scthrees").innerHTML=`${Sumones(3)}`;
-    document.querySelector(".scfours").innerHTML=`${Sumones(4)}`;
-    document.querySelector(".scfives").innerHTML=`${Sumones(5)}`;
-    document.querySelector(".scsixs").innerHTML=`${Sumones(6)}`;
-    document.querySelector(".scchoice").innerHTML=`${choice(result)}`;
-    document.querySelector(".sclilstraight").innerHTML=`${littleStraight(result)}`;
-    document.querySelector(".scyacht").innerHTML=`${yacht(result)}`;
-    document.querySelector(".scbigstraight").innerHTML=`${bigStraight(result)}`;
-    document.querySelector(".scfullhouse").innerHTML=`${fullhouse(result)}`
-    document.querySelector(".scfourofakind").innerHTML=`${forofakind(result)}`;   
-    }
-    clickcountRoll +=1;
-})
+    clickcountbtn ++;
+    if(clickcountbtn == 12){
+    endmention();
+}
 },{ once : true })
 
-//sixes
 document.querySelector(".sixs").addEventListener("click",function(){
-    total += Sumones(6);
+    total += Sumones(6,dice);
     document.querySelector(".score").innerHTML=`${total}`;
     document.querySelector(".sixs").style.backgroundColor = 'blue';
     clickcountRoll = 0;
@@ -889,112 +342,18 @@ document.querySelector(".sixs").addEventListener("click",function(){
     clickcountDice4 = 0;
     clickcountDice5 = 0;
     for(var i=0;i<5;i++){
-    document.querySelectorAll(".dice")[i].innerHTML="*";
     document.querySelectorAll(".dice")[i].style.backgroundColor = 'white';
     }
-    document.querySelector(".roll").addEventListener("click",function(clickcountRoll){    
-    if(clickcountRoll == 0){
-        //주사위 담을 배열
-    dice = []; 
-    //주사위 랜덤 부여
-    for(var i=0;i<5;i++){
-        dice[i] = Math.floor(Math.random()*6)+1;   
-        }
-    //중복체크하고, 중복된 요소를 저장하는 result object
-    result = {};
-    dice.forEach((x) => {result[x] = (result[x] || 0)+1;});
-    document.querySelector(".keep").innerHTML='choose what to keep';
-    document.querySelector(".lastkeep").innerHTML=`last keep chance: ${2-clickcountRoll}`;
-    document.querySelector(".btn1").innerHTML=`${dice[0]}`;
-    document.querySelector(".btn2").innerHTML=`${dice[1]}`;
-    document.querySelector(".btn3").innerHTML=`${dice[2]}`;
-    document.querySelector(".btn4").innerHTML=`${dice[3]}`;
-    document.querySelector(".btn5").innerHTML=`${dice[4]}`;
-
-    document.querySelector(".scones").innerHTML=`${Sumones(1)}`;
-    document.querySelector(".sctwos").innerHTML=`${Sumones(2)}`;
-    document.querySelector(".scthrees").innerHTML=`${Sumones(3)}`;
-    document.querySelector(".scfours").innerHTML=`${Sumones(4)}`;
-    document.querySelector(".scfives").innerHTML=`${Sumones(5)}`;
-    document.querySelector(".scsixs").innerHTML=`${Sumones(6)}`;
-    document.querySelector(".scchoice").innerHTML=`${choice(result)}`;
-    document.querySelector(".sclilstraight").innerHTML=`${littleStraight(result)}`;
-    document.querySelector(".scyacht").innerHTML=`${yacht(result)}`;
-    document.querySelector(".scbigstraight").innerHTML=`${bigStraight(result)}`;
-    document.querySelector(".scfullhouse").innerHTML=`${fullhouse(result)}`
-    document.querySelector(".scfourofakind").innerHTML=`${forofakind(result)}`;
-    }else if(clickcountRoll == 1){
-    let lastdice = dicelist.filter(x =>!changedice.includes(x));
-    for(var i=0;i<lastdice.length;i++){
-        let index = lastdice[i]-1;
-        dice[index] = Math.floor(Math.random()*6)+1;
-    }   
-    console.log(dice);
-    result = {};
-    dice.forEach((x) => {
-    result[x] = (result[x] || 0)+1;
-    });
-    console.log(result);
-    document.querySelector(".lastkeep").innerHTML=`last keep chance: ${2-clickcountRoll}`;    
-    document.querySelector(".btn1").innerHTML=`${dice[0]}`;
-    document.querySelector(".btn2").innerHTML=`${dice[1]}`;
-    document.querySelector(".btn3").innerHTML=`${dice[2]}`;
-    document.querySelector(".btn4").innerHTML=`${dice[3]}`;
-    document.querySelector(".btn5").innerHTML=`${dice[4]}`;
-    
-    document.querySelector(".scones").innerHTML=`${Sumones(1)}`;
-    document.querySelector(".sctwos").innerHTML=`${Sumones(2)}`;
-    document.querySelector(".scthrees").innerHTML=`${Sumones(3)}`;
-    document.querySelector(".scfours").innerHTML=`${Sumones(4)}`;
-    document.querySelector(".scfives").innerHTML=`${Sumones(5)}`;
-    document.querySelector(".scsixs").innerHTML=`${Sumones(6)}`;
-    document.querySelector(".scchoice").innerHTML=`${choice(result)}`;
-    document.querySelector(".sclilstraight").innerHTML=`${littleStraight(result)}`;
-    document.querySelector(".scyacht").innerHTML=`${yacht(result)}`;
-    document.querySelector(".scbigstraight").innerHTML=`${bigStraight(result)}`;
-    document.querySelector(".scfullhouse").innerHTML=`${fullhouse(result)}`
-    document.querySelector(".scfourofakind").innerHTML=`${forofakind(result)}`;        
-    }else if(clickcountRoll == 2){
-    let lastdice = dicelist.filter(x =>!changedice.includes(x));
-    for(var i=0;i<lastdice.length;i++){
-        let index = lastdice[i]-1;
-        dice[index] = Math.floor(Math.random()*6)+1;
-    }   
-    console.log(dice);
-    result = {};
-    dice.forEach((x) => {
-    result[x] = (result[x] || 0)+1;
-    });
-    console.log(result);
-    document.querySelector(".lastkeep").innerHTML=`last keep chance: ${2-clickcountRoll}`;    
-    document.querySelector(".btn1").innerHTML=`${dice[0]}`;
-    document.querySelector(".btn2").innerHTML=`${dice[1]}`;
-    document.querySelector(".btn3").innerHTML=`${dice[2]}`;
-    document.querySelector(".btn4").innerHTML=`${dice[3]}`;
-    document.querySelector(".btn5").innerHTML=`${dice[4]}`;
-    
-    document.querySelector(".scones").innerHTML=`${Sumones(1)}`;
-    document.querySelector(".sctwos").innerHTML=`${Sumones(2)}`;
-    document.querySelector(".scthrees").innerHTML=`${Sumones(3)}`;
-    document.querySelector(".scfours").innerHTML=`${Sumones(4)}`;
-    document.querySelector(".scfives").innerHTML=`${Sumones(5)}`;
-    document.querySelector(".scsixs").innerHTML=`${Sumones(6)}`;
-    document.querySelector(".scchoice").innerHTML=`${choice(result)}`;
-    document.querySelector(".sclilstraight").innerHTML=`${littleStraight(result)}`;
-    document.querySelector(".scyacht").innerHTML=`${yacht(result)}`;
-    document.querySelector(".scbigstraight").innerHTML=`${bigStraight(result)}`;
-    document.querySelector(".scfullhouse").innerHTML=`${fullhouse(result)}`
-    document.querySelector(".scfourofakind").innerHTML=`${forofakind(result)}`;   
-    }
-    clickcountRoll +=1;
-})
+    clickcountbtn ++;
+    if(clickcountbtn == 12){
+    endmention();
+}
 },{ once : true })
 
-//fourofakind
-document.querySelector(".fourofakind").addEventListener("click",function(){
-    total += forofakind(result);
+document.querySelector(".choice").addEventListener("click",function(){
+    total += choice(dice);
     document.querySelector(".score").innerHTML=`${total}`;
-    document.querySelector(".fourofakind").style.backgroundColor = 'blue';
+    document.querySelector(".choice").style.backgroundColor = 'blue';
     clickcountRoll = 0;
     clickcountDice1 = 0;
     clickcountDice2 = 0;
@@ -1002,223 +361,17 @@ document.querySelector(".fourofakind").addEventListener("click",function(){
     clickcountDice4 = 0;
     clickcountDice5 = 0;
     for(var i=0;i<5;i++){
-    document.querySelectorAll(".dice")[i].innerHTML="*";
     document.querySelectorAll(".dice")[i].style.backgroundColor = 'white';
     }
-    document.querySelector(".roll").addEventListener("click",function(clickcountRoll){    
-    if(clickcountRoll == 0){
-            //주사위 담을 배열
-    dice = []; 
-    //주사위 랜덤 부여
-    for(var i=0;i<5;i++){
-        dice[i] = Math.floor(Math.random()*6)+1;   
-        }
-    //중복체크하고, 중복된 요소를 저장하는 result object
-    result = {};
-    dice.forEach((x) => {result[x] = (result[x] || 0)+1;});
-    document.querySelector(".keep").innerHTML='choose what to keep';
-    document.querySelector(".lastkeep").innerHTML=`last keep chance: ${2-clickcountRoll}`;
-    document.querySelector(".btn1").innerHTML=`${dice[0]}`;
-    document.querySelector(".btn2").innerHTML=`${dice[1]}`;
-    document.querySelector(".btn3").innerHTML=`${dice[2]}`;
-    document.querySelector(".btn4").innerHTML=`${dice[3]}`;
-    document.querySelector(".btn5").innerHTML=`${dice[4]}`;
-
-    document.querySelector(".scones").innerHTML=`${Sumones(1)}`;
-    document.querySelector(".sctwos").innerHTML=`${Sumones(2)}`;
-    document.querySelector(".scthrees").innerHTML=`${Sumones(3)}`;
-    document.querySelector(".scfours").innerHTML=`${Sumones(4)}`;
-    document.querySelector(".scfives").innerHTML=`${Sumones(5)}`;
-    document.querySelector(".scsixs").innerHTML=`${Sumones(6)}`;
-    document.querySelector(".scchoice").innerHTML=`${choice(result)}`;
-    document.querySelector(".sclilstraight").innerHTML=`${littleStraight(result)}`;
-    document.querySelector(".scyacht").innerHTML=`${yacht(result)}`;
-    document.querySelector(".scbigstraight").innerHTML=`${bigStraight(result)}`;
-    document.querySelector(".scfullhouse").innerHTML=`${fullhouse(result)}`
-    document.querySelector(".scfourofakind").innerHTML=`${forofakind(result)}`;
-    }else if(clickcountRoll == 1){
-    let lastdice = dicelist.filter(x =>!changedice.includes(x));
-    for(var i=0;i<lastdice.length;i++){
-        let index = lastdice[i]-1;
-        dice[index] = Math.floor(Math.random()*6)+1;
-    }   
-    console.log(dice);
-    result = {};
-    dice.forEach((x) => {
-    result[x] = (result[x] || 0)+1;
-    });
-    console.log(result);
-    document.querySelector(".lastkeep").innerHTML=`last keep chance: ${2-clickcountRoll}`;    
-    document.querySelector(".btn1").innerHTML=`${dice[0]}`;
-    document.querySelector(".btn2").innerHTML=`${dice[1]}`;
-    document.querySelector(".btn3").innerHTML=`${dice[2]}`;
-    document.querySelector(".btn4").innerHTML=`${dice[3]}`;
-    document.querySelector(".btn5").innerHTML=`${dice[4]}`;
-    
-    document.querySelector(".scones").innerHTML=`${Sumones(1)}`;
-    document.querySelector(".sctwos").innerHTML=`${Sumones(2)}`;
-    document.querySelector(".scthrees").innerHTML=`${Sumones(3)}`;
-    document.querySelector(".scfours").innerHTML=`${Sumones(4)}`;
-    document.querySelector(".scfives").innerHTML=`${Sumones(5)}`;
-    document.querySelector(".scsixs").innerHTML=`${Sumones(6)}`;
-    document.querySelector(".scchoice").innerHTML=`${choice(result)}`;
-    document.querySelector(".sclilstraight").innerHTML=`${littleStraight(result)}`;
-    document.querySelector(".scyacht").innerHTML=`${yacht(result)}`;
-    document.querySelector(".scbigstraight").innerHTML=`${bigStraight(result)}`;
-    document.querySelector(".scfullhouse").innerHTML=`${fullhouse(result)}`
-    document.querySelector(".scfourofakind").innerHTML=`${forofakind(result)}`;        
-    }else if(clickcountRoll == 2){
-    let lastdice = dicelist.filter(x =>!changedice.includes(x));
-    for(var i=0;i<lastdice.length;i++){
-        let index = lastdice[i]-1;
-        dice[index] = Math.floor(Math.random()*6)+1;
-    }   
-    console.log(dice);
-    result = {};
-    dice.forEach((x) => {
-    result[x] = (result[x] || 0)+1;
-    });
-    console.log(result);
-    document.querySelector(".lastkeep").innerHTML=`last keep chance: ${2-clickcountRoll}`;    
-    document.querySelector(".btn1").innerHTML=`${dice[0]}`;
-    document.querySelector(".btn2").innerHTML=`${dice[1]}`;
-    document.querySelector(".btn3").innerHTML=`${dice[2]}`;
-    document.querySelector(".btn4").innerHTML=`${dice[3]}`;
-    document.querySelector(".btn5").innerHTML=`${dice[4]}`;
-    
-    document.querySelector(".scones").innerHTML=`${Sumones(1)}`;
-    document.querySelector(".sctwos").innerHTML=`${Sumones(2)}`;
-    document.querySelector(".scthrees").innerHTML=`${Sumones(3)}`;
-    document.querySelector(".scfours").innerHTML=`${Sumones(4)}`;
-    document.querySelector(".scfives").innerHTML=`${Sumones(5)}`;
-    document.querySelector(".scsixs").innerHTML=`${Sumones(6)}`;
-    document.querySelector(".scchoice").innerHTML=`${choice(result)}`;
-    document.querySelector(".sclilstraight").innerHTML=`${littleStraight(result)}`;
-    document.querySelector(".scyacht").innerHTML=`${yacht(result)}`;
-    document.querySelector(".scbigstraight").innerHTML=`${bigStraight(result)}`;
-    document.querySelector(".scfullhouse").innerHTML=`${fullhouse(result)}`
-    document.querySelector(".scfourofakind").innerHTML=`${forofakind(result)}`;   
-    }
-    clickcountRoll +=1;
-})
+    clickcountbtn ++;
+    if(clickcountbtn == 12){
+    endmention();
+}
 },{ once : true })
 
-//fullhouse
-document.querySelector(".fullhouse").addEventListener("click",function(){
-    total += fullhouse(result);
-    document.querySelector(".score").innerHTML=`${total}`;
-    document.querySelector(".fullhouse").style.backgroundColor = 'blue';
-    clickcountRoll = 0;
-    clickcountDice1 = 0;
-    clickcountDice2 = 0;
-    clickcountDice3 = 0;
-    clickcountDice4 = 0;
-    clickcountDice5 = 0;
-    for(var i=0;i<5;i++){
-    document.querySelectorAll(".dice")[i].innerHTML="*";
-    document.querySelectorAll(".dice")[i].style.backgroundColor = 'white';
-    }
-    document.querySelector(".roll").addEventListener("click",function(clickcountRoll){    
-    if(clickcountRoll == 0){
-            //주사위 담을 배열
-    dice = []; 
-    //주사위 랜덤 부여
-    for(var i=0;i<5;i++){
-        dice[i] = Math.floor(Math.random()*6)+1;   
-        }
-    //중복체크하고, 중복된 요소를 저장하는 result object
-    result = {};
-    dice.forEach((x) => {result[x] = (result[x] || 0)+1;});
-    document.querySelector(".keep").innerHTML='choose what to keep';
-    document.querySelector(".lastkeep").innerHTML=`last keep chance: ${2-clickcountRoll}`;
-    document.querySelector(".btn1").innerHTML=`${dice[0]}`;
-    document.querySelector(".btn2").innerHTML=`${dice[1]}`;
-    document.querySelector(".btn3").innerHTML=`${dice[2]}`;
-    document.querySelector(".btn4").innerHTML=`${dice[3]}`;
-    document.querySelector(".btn5").innerHTML=`${dice[4]}`;
-
-    document.querySelector(".scones").innerHTML=`${Sumones(1)}`;
-    document.querySelector(".sctwos").innerHTML=`${Sumones(2)}`;
-    document.querySelector(".scthrees").innerHTML=`${Sumones(3)}`;
-    document.querySelector(".scfours").innerHTML=`${Sumones(4)}`;
-    document.querySelector(".scfives").innerHTML=`${Sumones(5)}`;
-    document.querySelector(".scsixs").innerHTML=`${Sumones(6)}`;
-    document.querySelector(".scchoice").innerHTML=`${choice(result)}`;
-    document.querySelector(".sclilstraight").innerHTML=`${littleStraight(result)}`;
-    document.querySelector(".scyacht").innerHTML=`${yacht(result)}`;
-    document.querySelector(".scbigstraight").innerHTML=`${bigStraight(result)}`;
-    document.querySelector(".scfullhouse").innerHTML=`${fullhouse(result)}`
-    document.querySelector(".scfourofakind").innerHTML=`${forofakind(result)}`;
-    }else if(clickcountRoll == 1){
-    let lastdice = dicelist.filter(x =>!changedice.includes(x));
-    for(var i=0;i<lastdice.length;i++){
-        let index = lastdice[i]-1;
-        dice[index] = Math.floor(Math.random()*6)+1;
-    }   
-    console.log(dice);
-    result = {};
-    dice.forEach((x) => {
-    result[x] = (result[x] || 0)+1;
-    });
-    console.log(result);
-    document.querySelector(".lastkeep").innerHTML=`last keep chance: ${2-clickcountRoll}`;    
-    document.querySelector(".btn1").innerHTML=`${dice[0]}`;
-    document.querySelector(".btn2").innerHTML=`${dice[1]}`;
-    document.querySelector(".btn3").innerHTML=`${dice[2]}`;
-    document.querySelector(".btn4").innerHTML=`${dice[3]}`;
-    document.querySelector(".btn5").innerHTML=`${dice[4]}`;
-    
-    document.querySelector(".scones").innerHTML=`${Sumones(1)}`;
-    document.querySelector(".sctwos").innerHTML=`${Sumones(2)}`;
-    document.querySelector(".scthrees").innerHTML=`${Sumones(3)}`;
-    document.querySelector(".scfours").innerHTML=`${Sumones(4)}`;
-    document.querySelector(".scfives").innerHTML=`${Sumones(5)}`;
-    document.querySelector(".scsixs").innerHTML=`${Sumones(6)}`;
-    document.querySelector(".scchoice").innerHTML=`${choice(result)}`;
-    document.querySelector(".sclilstraight").innerHTML=`${littleStraight(result)}`;
-    document.querySelector(".scyacht").innerHTML=`${yacht(result)}`;
-    document.querySelector(".scbigstraight").innerHTML=`${bigStraight(result)}`;
-    document.querySelector(".scfullhouse").innerHTML=`${fullhouse(result)}`
-    document.querySelector(".scfourofakind").innerHTML=`${forofakind(result)}`;        
-    }else if(clickcountRoll == 2){
-    let lastdice = dicelist.filter(x =>!changedice.includes(x));
-    for(var i=0;i<lastdice.length;i++){
-        let index = lastdice[i]-1;
-        dice[index] = Math.floor(Math.random()*6)+1;
-    }   
-    console.log(dice);
-    result = {};
-    dice.forEach((x) => {
-    result[x] = (result[x] || 0)+1;
-    });
-    console.log(result);
-    document.querySelector(".lastkeep").innerHTML=`last keep chance: ${2-clickcountRoll}`;    
-    document.querySelector(".btn1").innerHTML=`${dice[0]}`;
-    document.querySelector(".btn2").innerHTML=`${dice[1]}`;
-    document.querySelector(".btn3").innerHTML=`${dice[2]}`;
-    document.querySelector(".btn4").innerHTML=`${dice[3]}`;
-    document.querySelector(".btn5").innerHTML=`${dice[4]}`;
-    
-    document.querySelector(".scones").innerHTML=`${Sumones(1)}`;
-    document.querySelector(".sctwos").innerHTML=`${Sumones(2)}`;
-    document.querySelector(".scthrees").innerHTML=`${Sumones(3)}`;
-    document.querySelector(".scfours").innerHTML=`${Sumones(4)}`;
-    document.querySelector(".scfives").innerHTML=`${Sumones(5)}`;
-    document.querySelector(".scsixs").innerHTML=`${Sumones(6)}`;
-    document.querySelector(".scchoice").innerHTML=`${choice(result)}`;
-    document.querySelector(".sclilstraight").innerHTML=`${littleStraight(result)}`;
-    document.querySelector(".scyacht").innerHTML=`${yacht(result)}`;
-    document.querySelector(".scbigstraight").innerHTML=`${bigStraight(result)}`;
-    document.querySelector(".scfullhouse").innerHTML=`${fullhouse(result)}`
-    document.querySelector(".scfourofakind").innerHTML=`${forofakind(result)}`;   
-    }
-    clickcountRoll +=1;
-})
-},{ once : true })
-
-//littlestright
 document.querySelector(".lilstraight").addEventListener("click",function(){
-    total += littleStraight(result);
+    const lilstraightscore = littleStraight(result);
+    total += lilstraightscore;
     document.querySelector(".score").innerHTML=`${total}`;
     document.querySelector(".lilstraight").style.backgroundColor = 'blue';
     clickcountRoll = 0;
@@ -1228,110 +381,17 @@ document.querySelector(".lilstraight").addEventListener("click",function(){
     clickcountDice4 = 0;
     clickcountDice5 = 0;
     for(var i=0;i<5;i++){
-    document.querySelectorAll(".dice")[i].innerHTML="*";
     document.querySelectorAll(".dice")[i].style.backgroundColor = 'white';
     }
-    document.querySelector(".roll").addEventListener("click",function(clickcountRoll){
-    if(clickcountRoll == 0){
-            //주사위 담을 배열
-    dice = []; 
-    //주사위 랜덤 부여
-    for(var i=0;i<5;i++){
-        dice[i] = Math.floor(Math.random()*6)+1;   
-        }
-    //중복체크하고, 중복된 요소를 저장하는 result object
-    result = {};
-    dice.forEach((x) => {result[x] = (result[x] || 0)+1;});
-    document.querySelector(".keep").innerHTML='choose what to keep';
-    document.querySelector(".lastkeep").innerHTML=`last keep chance: ${2-clickcountRoll}`;
-    document.querySelector(".btn1").innerHTML=`${dice[0]}`;
-    document.querySelector(".btn2").innerHTML=`${dice[1]}`;
-    document.querySelector(".btn3").innerHTML=`${dice[2]}`;
-    document.querySelector(".btn4").innerHTML=`${dice[3]}`;
-    document.querySelector(".btn5").innerHTML=`${dice[4]}`;
-
-    document.querySelector(".scones").innerHTML=`${Sumones(1)}`;
-    document.querySelector(".sctwos").innerHTML=`${Sumones(2)}`;
-    document.querySelector(".scthrees").innerHTML=`${Sumones(3)}`;
-    document.querySelector(".scfours").innerHTML=`${Sumones(4)}`;
-    document.querySelector(".scfives").innerHTML=`${Sumones(5)}`;
-    document.querySelector(".scsixs").innerHTML=`${Sumones(6)}`;
-    document.querySelector(".scchoice").innerHTML=`${choice(result)}`;
-    document.querySelector(".sclilstraight").innerHTML=`${littleStraight(result)}`;
-    document.querySelector(".scyacht").innerHTML=`${yacht(result)}`;
-    document.querySelector(".scbigstraight").innerHTML=`${bigStraight(result)}`;
-    document.querySelector(".scfullhouse").innerHTML=`${fullhouse(result)}`
-    document.querySelector(".scfourofakind").innerHTML=`${forofakind(result)}`;
-    }else if(clickcountRoll == 1){
-    let lastdice = dicelist.filter(x =>!changedice.includes(x));
-    for(var i=0;i<lastdice.length;i++){
-        let index = lastdice[i]-1;
-        dice[index] = Math.floor(Math.random()*6)+1;
-    }   
-    console.log(dice);
-    result = {};
-    dice.forEach((x) => {
-    result[x] = (result[x] || 0)+1;
-    });
-    console.log(result);
-    document.querySelector(".lastkeep").innerHTML=`last keep chance: ${2-clickcountRoll}`;    
-    document.querySelector(".btn1").innerHTML=`${dice[0]}`;
-    document.querySelector(".btn2").innerHTML=`${dice[1]}`;
-    document.querySelector(".btn3").innerHTML=`${dice[2]}`;
-    document.querySelector(".btn4").innerHTML=`${dice[3]}`;
-    document.querySelector(".btn5").innerHTML=`${dice[4]}`;
-    
-    document.querySelector(".scones").innerHTML=`${Sumones(1)}`;
-    document.querySelector(".sctwos").innerHTML=`${Sumones(2)}`;
-    document.querySelector(".scthrees").innerHTML=`${Sumones(3)}`;
-    document.querySelector(".scfours").innerHTML=`${Sumones(4)}`;
-    document.querySelector(".scfives").innerHTML=`${Sumones(5)}`;
-    document.querySelector(".scsixs").innerHTML=`${Sumones(6)}`;
-    document.querySelector(".scchoice").innerHTML=`${choice(result)}`;
-    document.querySelector(".sclilstraight").innerHTML=`${littleStraight(result)}`;
-    document.querySelector(".scyacht").innerHTML=`${yacht(result)}`;
-    document.querySelector(".scbigstraight").innerHTML=`${bigStraight(result)}`;
-    document.querySelector(".scfullhouse").innerHTML=`${fullhouse(result)}`
-    document.querySelector(".scfourofakind").innerHTML=`${forofakind(result)}`;        
-    }else if(clickcountRoll == 2){
-    let lastdice = dicelist.filter(x =>!changedice.includes(x));
-    for(var i=0;i<lastdice.length;i++){
-        let index = lastdice[i]-1;
-        dice[index] = Math.floor(Math.random()*6)+1;
-    }   
-    console.log(dice);
-    result = {};
-    dice.forEach((x) => {
-    result[x] = (result[x] || 0)+1;
-    });
-    console.log(result);
-    document.querySelector(".lastkeep").innerHTML=`last keep chance: ${2-clickcountRoll}`;    
-    document.querySelector(".btn1").innerHTML=`${dice[0]}`;
-    document.querySelector(".btn2").innerHTML=`${dice[1]}`;
-    document.querySelector(".btn3").innerHTML=`${dice[2]}`;
-    document.querySelector(".btn4").innerHTML=`${dice[3]}`;
-    document.querySelector(".btn5").innerHTML=`${dice[4]}`;
-    
-    document.querySelector(".scones").innerHTML=`${Sumones(1)}`;
-    document.querySelector(".sctwos").innerHTML=`${Sumones(2)}`;
-    document.querySelector(".scthrees").innerHTML=`${Sumones(3)}`;
-    document.querySelector(".scfours").innerHTML=`${Sumones(4)}`;
-    document.querySelector(".scfives").innerHTML=`${Sumones(5)}`;
-    document.querySelector(".scsixs").innerHTML=`${Sumones(6)}`;
-    document.querySelector(".scchoice").innerHTML=`${choice(result)}`;
-    document.querySelector(".sclilstraight").innerHTML=`${littleStraight(result)}`;
-    document.querySelector(".scyacht").innerHTML=`${yacht(result)}`;
-    document.querySelector(".scbigstraight").innerHTML=`${bigStraight(result)}`;
-    document.querySelector(".scfullhouse").innerHTML=`${fullhouse(result)}`
-    document.querySelector(".scfourofakind").innerHTML=`${forofakind(result)}`;   
-    }
-    clickcountRoll +=1;
-})
+    clickcountbtn ++;
+    if(clickcountbtn == 12){
+    endmention();
+}
 },{ once : true })
 
-//bigstright
 document.querySelector(".bigstraight").addEventListener("click",function(){
-    total += bigStraight(result);
+    const bigstraightscore = bigStraight(result);
+    total += bigstraightscore;
     document.querySelector(".score").innerHTML=`${total}`;
     document.querySelector(".bigstraight").style.backgroundColor = 'blue';
     clickcountRoll = 0;
@@ -1341,224 +401,57 @@ document.querySelector(".bigstraight").addEventListener("click",function(){
     clickcountDice4 = 0;
     clickcountDice5 = 0;
     for(var i=0;i<5;i++){
-    document.querySelectorAll(".dice")[i].innerHTML="*";
     document.querySelectorAll(".dice")[i].style.backgroundColor = 'white';
     }
-    document.querySelector(".roll").addEventListener("click",function(clickcountRoll){    
-    if(clickcountRoll == 0){
-            //주사위 담을 배열
-    dice = []; 
-    //주사위 랜덤 부여
-    for(var i=0;i<5;i++){
-        dice[i] = Math.floor(Math.random()*6)+1;   
-        }
-    //중복체크하고, 중복된 요소를 저장하는 result object
-    result = {};
-    dice.forEach((x) => {result[x] = (result[x] || 0)+1;});
-    document.querySelector(".keep").innerHTML='choose what to keep';
-    document.querySelector(".lastkeep").innerHTML=`last keep chance: ${2-clickcountRoll}`;
-    document.querySelector(".btn1").innerHTML=`${dice[0]}`;
-    document.querySelector(".btn2").innerHTML=`${dice[1]}`;
-    document.querySelector(".btn3").innerHTML=`${dice[2]}`;
-    document.querySelector(".btn4").innerHTML=`${dice[3]}`;
-    document.querySelector(".btn5").innerHTML=`${dice[4]}`;
-
-    document.querySelector(".scones").innerHTML=`${Sumones(1)}`;
-    document.querySelector(".sctwos").innerHTML=`${Sumones(2)}`;
-    document.querySelector(".scthrees").innerHTML=`${Sumones(3)}`;
-    document.querySelector(".scfours").innerHTML=`${Sumones(4)}`;
-    document.querySelector(".scfives").innerHTML=`${Sumones(5)}`;
-    document.querySelector(".scsixs").innerHTML=`${Sumones(6)}`;
-    document.querySelector(".scchoice").innerHTML=`${choice(result)}`;
-    document.querySelector(".sclilstraight").innerHTML=`${littleStraight(result)}`;
-    document.querySelector(".scyacht").innerHTML=`${yacht(result)}`;
-    document.querySelector(".scbigstraight").innerHTML=`${bigStraight(result)}`;
-    document.querySelector(".scfullhouse").innerHTML=`${fullhouse(result)}`
-    document.querySelector(".scfourofakind").innerHTML=`${forofakind(result)}`;
-    }else if(clickcountRoll == 1){
-    let lastdice = dicelist.filter(x =>!changedice.includes(x));
-    for(var i=0;i<lastdice.length;i++){
-        let index = lastdice[i]-1;
-        dice[index] = Math.floor(Math.random()*6)+1;
-    }   
-    console.log(dice);
-    result = {};
-    dice.forEach((x) => {
-    result[x] = (result[x] || 0)+1;
-    });
-    console.log(result);
-    document.querySelector(".lastkeep").innerHTML=`last keep chance: ${2-clickcountRoll}`;    
-    document.querySelector(".btn1").innerHTML=`${dice[0]}`;
-    document.querySelector(".btn2").innerHTML=`${dice[1]}`;
-    document.querySelector(".btn3").innerHTML=`${dice[2]}`;
-    document.querySelector(".btn4").innerHTML=`${dice[3]}`;
-    document.querySelector(".btn5").innerHTML=`${dice[4]}`;
-    
-    document.querySelector(".scones").innerHTML=`${Sumones(1)}`;
-    document.querySelector(".sctwos").innerHTML=`${Sumones(2)}`;
-    document.querySelector(".scthrees").innerHTML=`${Sumones(3)}`;
-    document.querySelector(".scfours").innerHTML=`${Sumones(4)}`;
-    document.querySelector(".scfives").innerHTML=`${Sumones(5)}`;
-    document.querySelector(".scsixs").innerHTML=`${Sumones(6)}`;
-    document.querySelector(".scchoice").innerHTML=`${choice(result)}`;
-    document.querySelector(".sclilstraight").innerHTML=`${littleStraight(result)}`;
-    document.querySelector(".scyacht").innerHTML=`${yacht(result)}`;
-    document.querySelector(".scbigstraight").innerHTML=`${bigStraight(result)}`;
-    document.querySelector(".scfullhouse").innerHTML=`${fullhouse(result)}`
-    document.querySelector(".scfourofakind").innerHTML=`${forofakind(result)}`;        
-    }else if(clickcountRoll == 2){
-    let lastdice = dicelist.filter(x =>!changedice.includes(x));
-    for(var i=0;i<lastdice.length;i++){
-        let index = lastdice[i]-1;
-        dice[index] = Math.floor(Math.random()*6)+1;
-    }   
-    console.log(dice);
-    result = {};
-    dice.forEach((x) => {
-    result[x] = (result[x] || 0)+1;
-    });
-    console.log(result);
-    document.querySelector(".lastkeep").innerHTML=`last keep chance: ${2-clickcountRoll}`;    
-    document.querySelector(".btn1").innerHTML=`${dice[0]}`;
-    document.querySelector(".btn2").innerHTML=`${dice[1]}`;
-    document.querySelector(".btn3").innerHTML=`${dice[2]}`;
-    document.querySelector(".btn4").innerHTML=`${dice[3]}`;
-    document.querySelector(".btn5").innerHTML=`${dice[4]}`;
-    
-    document.querySelector(".scones").innerHTML=`${Sumones(1)}`;
-    document.querySelector(".sctwos").innerHTML=`${Sumones(2)}`;
-    document.querySelector(".scthrees").innerHTML=`${Sumones(3)}`;
-    document.querySelector(".scfours").innerHTML=`${Sumones(4)}`;
-    document.querySelector(".scfives").innerHTML=`${Sumones(5)}`;
-    document.querySelector(".scsixs").innerHTML=`${Sumones(6)}`;
-    document.querySelector(".scchoice").innerHTML=`${choice(result)}`;
-    document.querySelector(".sclilstraight").innerHTML=`${littleStraight(result)}`;
-    document.querySelector(".scyacht").innerHTML=`${yacht(result)}`;
-    document.querySelector(".scbigstraight").innerHTML=`${bigStraight(result)}`;
-    document.querySelector(".scfullhouse").innerHTML=`${fullhouse(result)}`
-    document.querySelector(".scfourofakind").innerHTML=`${forofakind(result)}`;   
-    }
-    clickcountRoll +=1;
-})
+    clickcountbtn ++;
+    if(clickcountbtn == 12){
+    endmention();
+}
 },{ once : true })
 
-//choice
-document.querySelector(".choice").addEventListener("click",function(){
-    total += choice();
+document.querySelector(".fullhouse").addEventListener("click",function(){
+    const fullhousescore = fullhouse(result,dice);
+    total += fullhouse(result,dice);
     document.querySelector(".score").innerHTML=`${total}`;
-    document.querySelector(".choice").style.backgroundColor = 'blue';
+    document.querySelector(".fullhouse").style.backgroundColor = 'blue';
     clickcountRoll = 0;
     clickcountDice1 = 0;
     clickcountDice2 = 0;
     clickcountDice3 = 0;
     clickcountDice4 = 0;
     clickcountDice5 = 0;
-
     for(var i=0;i<5;i++){
-    document.querySelectorAll(".dice")[i].innerHTML="*";
     document.querySelectorAll(".dice")[i].style.backgroundColor = 'white';
     }
-    document.querySelector(".roll").addEventListener("click",function(clickcountRoll){    
-    if(clickcountRoll == 0){
-            //주사위 담을 배열
-    dice = []; 
-    //주사위 랜덤 부여
-    for(var i=0;i<5;i++){
-        dice[i] = Math.floor(Math.random()*6)+1;   
-        }
-    //중복체크하고, 중복된 요소를 저장하는 result object
-    result = {};
-    dice.forEach((x) => {result[x] = (result[x] || 0)+1;});
-    document.querySelector(".keep").innerHTML='choose what to keep';
-    document.querySelector(".lastkeep").innerHTML=`last keep chance: ${2-clickcountRoll}`;
-    document.querySelector(".btn1").innerHTML=`${dice[0]}`;
-    document.querySelector(".btn2").innerHTML=`${dice[1]}`;
-    document.querySelector(".btn3").innerHTML=`${dice[2]}`;
-    document.querySelector(".btn4").innerHTML=`${dice[3]}`;
-    document.querySelector(".btn5").innerHTML=`${dice[4]}`;
-
-    document.querySelector(".scones").innerHTML=`${Sumones(1)}`;
-    document.querySelector(".sctwos").innerHTML=`${Sumones(2)}`;
-    document.querySelector(".scthrees").innerHTML=`${Sumones(3)}`;
-    document.querySelector(".scfours").innerHTML=`${Sumones(4)}`;
-    document.querySelector(".scfives").innerHTML=`${Sumones(5)}`;
-    document.querySelector(".scsixs").innerHTML=`${Sumones(6)}`;
-    document.querySelector(".scchoice").innerHTML=`${choice(result)}`;
-    document.querySelector(".sclilstraight").innerHTML=`${littleStraight(result)}`;
-    document.querySelector(".scyacht").innerHTML=`${yacht(result)}`;
-    document.querySelector(".scbigstraight").innerHTML=`${bigStraight(result)}`;
-    document.querySelector(".scfullhouse").innerHTML=`${fullhouse(result)}`
-    document.querySelector(".scfourofakind").innerHTML=`${forofakind(result)}`;
-    }else if(clickcountRoll == 1){
-    let lastdice = dicelist.filter(x =>!changedice.includes(x));
-    for(var i=0;i<lastdice.length;i++){
-        let index = lastdice[i]-1;
-        dice[index] = Math.floor(Math.random()*6)+1;
-    }   
-    console.log(dice);
-    let result = {};
-    dice.forEach((x) => {
-    result[x] = (result[x] || 0)+1;
-    });
-    console.log(result);
-    document.querySelector(".lastkeep").innerHTML=`last keep chance: ${2-clickcountRoll}`;    
-    document.querySelector(".btn1").innerHTML=`${dice[0]}`;
-    document.querySelector(".btn2").innerHTML=`${dice[1]}`;
-    document.querySelector(".btn3").innerHTML=`${dice[2]}`;
-    document.querySelector(".btn4").innerHTML=`${dice[3]}`;
-    document.querySelector(".btn5").innerHTML=`${dice[4]}`;
-    
-    document.querySelector(".scones").innerHTML=`${Sumones(1)}`;
-    document.querySelector(".sctwos").innerHTML=`${Sumones(2)}`;
-    document.querySelector(".scthrees").innerHTML=`${Sumones(3)}`;
-    document.querySelector(".scfours").innerHTML=`${Sumones(4)}`;
-    document.querySelector(".scfives").innerHTML=`${Sumones(5)}`;
-    document.querySelector(".scsixs").innerHTML=`${Sumones(6)}`;
-    document.querySelector(".scchoice").innerHTML=`${choice(result)}`;
-    document.querySelector(".sclilstraight").innerHTML=`${littleStraight(result)}`;
-    document.querySelector(".scyacht").innerHTML=`${yacht(result)}`;
-    document.querySelector(".scbigstraight").innerHTML=`${bigStraight(result)}`;
-    document.querySelector(".scfullhouse").innerHTML=`${fullhouse(result)}`
-    document.querySelector(".scfourofakind").innerHTML=`${forofakind(result)}`;        
-    }else if(clickcountRoll == 2){
-    let lastdice = dicelist.filter(x =>!changedice.includes(x));
-    for(var i=0;i<lastdice.length;i++){
-        let index = lastdice[i]-1;
-        dice[index] = Math.floor(Math.random()*6)+1;
-    }   
-    console.log(dice);
-    let result = {};
-    dice.forEach((x) => {
-    result[x] = (result[x] || 0)+1;
-    });
-    console.log(result);
-    document.querySelector(".lastkeep").innerHTML=`last keep chance: ${2-clickcountRoll}`;    
-    document.querySelector(".btn1").innerHTML=`${dice[0]}`;
-    document.querySelector(".btn2").innerHTML=`${dice[1]}`;
-    document.querySelector(".btn3").innerHTML=`${dice[2]}`;
-    document.querySelector(".btn4").innerHTML=`${dice[3]}`;
-    document.querySelector(".btn5").innerHTML=`${dice[4]}`;
-    
-    document.querySelector(".scones").innerHTML=`${Sumones(1)}`;
-    document.querySelector(".sctwos").innerHTML=`${Sumones(2)}`;
-    document.querySelector(".scthrees").innerHTML=`${Sumones(3)}`;
-    document.querySelector(".scfours").innerHTML=`${Sumones(4)}`;
-    document.querySelector(".scfives").innerHTML=`${Sumones(5)}`;
-    document.querySelector(".scsixs").innerHTML=`${Sumones(6)}`;
-    document.querySelector(".scchoice").innerHTML=`${choice(result)}`;
-    document.querySelector(".sclilstraight").innerHTML=`${littleStraight(result)}`;
-    document.querySelector(".scyacht").innerHTML=`${yacht(result)}`;
-    document.querySelector(".scbigstraight").innerHTML=`${bigStraight(result)}`;
-    document.querySelector(".scfullhouse").innerHTML=`${fullhouse(result)}`
-    document.querySelector(".scfourofakind").innerHTML=`${forofakind(result)}`;   
-    }
-    clickcountRoll +=1;
-})
+    clickcountbtn ++;
+    if(clickcountbtn == 12){
+    endmention();
+}
 },{ once : true })
 
-//yacht
+document.querySelector(".fourofakind").addEventListener("click",function(){
+    const forofakindscore = forofakind(result);
+    total += forofakindscore;
+    document.querySelector(".score").innerHTML=`${total}`;
+    document.querySelector(".fourofakind").style.backgroundColor = 'blue';
+    clickcountRoll = 0;
+    clickcountDice1 = 0;
+    clickcountDice2 = 0;
+    clickcountDice3 = 0;
+    clickcountDice4 = 0;
+    clickcountDice5 = 0;
+    for(var i=0;i<5;i++){
+    document.querySelectorAll(".dice")[i].style.backgroundColor = 'white';
+    }
+    clickcountbtn ++;
+    if(clickcountbtn == 12){
+    endmention();
+}
+},{ once : true })
+
 document.querySelector(".yacht").addEventListener("click",function(){
-    total += yacht(result);
+    const yachtscore = yacht(result);
+    total += yachtscore;
     document.querySelector(".score").innerHTML=`${total}`;
     document.querySelector(".yacht").style.backgroundColor = 'blue';
     clickcountRoll = 0;
@@ -1568,104 +461,37 @@ document.querySelector(".yacht").addEventListener("click",function(){
     clickcountDice4 = 0;
     clickcountDice5 = 0;
     for(var i=0;i<5;i++){
-    document.querySelectorAll(".dice")[i].innerHTML="*";
     document.querySelectorAll(".dice")[i].style.backgroundColor = 'white';
     }
-    document.querySelector(".roll").addEventListener("click",function(clickcountRoll){    
-    if(clickcountRoll == 0){
-            //주사위 담을 배열
-    dice = []; 
-    //주사위 랜덤 부여
-    for(var i=0;i<5;i++){
-        dice[i] = Math.floor(Math.random()*6)+1;   
-        }
-    //중복체크하고, 중복된 요소를 저장하는 result object
-    result = {};
-    dice.forEach((x) => {result[x] = (result[x] || 0)+1;});
-    document.querySelector(".keep").innerHTML='choose what to keep';
-    document.querySelector(".lastkeep").innerHTML=`last keep chance: ${2-clickcountRoll}`;
-    document.querySelector(".btn1").innerHTML=`${dice[0]}`;
-    document.querySelector(".btn2").innerHTML=`${dice[1]}`;
-    document.querySelector(".btn3").innerHTML=`${dice[2]}`;
-    document.querySelector(".btn4").innerHTML=`${dice[3]}`;
-    document.querySelector(".btn5").innerHTML=`${dice[4]}`;
-
-    document.querySelector(".scones").innerHTML=`${Sumones(1)}`;
-    document.querySelector(".sctwos").innerHTML=`${Sumones(2)}`;
-    document.querySelector(".scthrees").innerHTML=`${Sumones(3)}`;
-    document.querySelector(".scfours").innerHTML=`${Sumones(4)}`;
-    document.querySelector(".scfives").innerHTML=`${Sumones(5)}`;
-    document.querySelector(".scsixs").innerHTML=`${Sumones(6)}`;
-    document.querySelector(".scchoice").innerHTML=`${choice(result)}`;
-    document.querySelector(".sclilstraight").innerHTML=`${littleStraight(result)}`;
-    document.querySelector(".scyacht").innerHTML=`${yacht(result)}`;
-    document.querySelector(".scbigstraight").innerHTML=`${bigStraight(result)}`;
-    document.querySelector(".scfullhouse").innerHTML=`${fullhouse(result)}`
-    document.querySelector(".scfourofakind").innerHTML=`${forofakind(result)}`;
-    }else if(clickcountRoll == 1){
-    let lastdice = dicelist.filter(x =>!changedice.includes(x));
-    for(var i=0;i<lastdice.length;i++){
-        let index = lastdice[i]-1;
-        dice[index] = Math.floor(Math.random()*6)+1;
-    }   
-    console.log(dice);
-    let result = {};
-    dice.forEach((x) => {
-    result[x] = (result[x] || 0)+1;
-    });
-    console.log(result);
-    document.querySelector(".lastkeep").innerHTML=`last keep chance: ${2-clickcountRoll}`;    
-    document.querySelector(".btn1").innerHTML=`${dice[0]}`;
-    document.querySelector(".btn2").innerHTML=`${dice[1]}`;
-    document.querySelector(".btn3").innerHTML=`${dice[2]}`;
-    document.querySelector(".btn4").innerHTML=`${dice[3]}`;
-    document.querySelector(".btn5").innerHTML=`${dice[4]}`;
-    
-    document.querySelector(".scones").innerHTML=`${Sumones(1)}`;
-    document.querySelector(".sctwos").innerHTML=`${Sumones(2)}`;
-    document.querySelector(".scthrees").innerHTML=`${Sumones(3)}`;
-    document.querySelector(".scfours").innerHTML=`${Sumones(4)}`;
-    document.querySelector(".scfives").innerHTML=`${Sumones(5)}`;
-    document.querySelector(".scsixs").innerHTML=`${Sumones(6)}`;
-    document.querySelector(".scchoice").innerHTML=`${choice(result)}`;
-    document.querySelector(".sclilstraight").innerHTML=`${littleStraight(result)}`;
-    document.querySelector(".scyacht").innerHTML=`${yacht(result)}`;
-    document.querySelector(".scbigstraight").innerHTML=`${bigStraight(result)}`;
-    document.querySelector(".scfullhouse").innerHTML=`${fullhouse(result)}`
-    document.querySelector(".scfourofakind").innerHTML=`${forofakind(result)}`;        
-    }else if(clickcountRoll == 2){
-    let lastdice = dicelist.filter(x =>!changedice.includes(x));
-    for(var i=0;i<lastdice.length;i++){
-        let index = lastdice[i]-1;
-        dice[index] = Math.floor(Math.random()*6)+1;
-    }   
-    console.log(dice);
-    let result = {};
-    dice.forEach((x) => {
-    result[x] = (result[x] || 0)+1;
-    });
-    console.log(result);
-    document.querySelector(".lastkeep").innerHTML=`last keep chance: ${2-clickcountRoll}`;    
-    document.querySelector(".btn1").innerHTML=`${dice[0]}`;
-    document.querySelector(".btn2").innerHTML=`${dice[1]}`;
-    document.querySelector(".btn3").innerHTML=`${dice[2]}`;
-    document.querySelector(".btn4").innerHTML=`${dice[3]}`;
-    document.querySelector(".btn5").innerHTML=`${dice[4]}`;
-    
-    document.querySelector(".scones").innerHTML=`${Sumones(1)}`;
-    document.querySelector(".sctwos").innerHTML=`${Sumones(2)}`;
-    document.querySelector(".scthrees").innerHTML=`${Sumones(3)}`;
-    document.querySelector(".scfours").innerHTML=`${Sumones(4)}`;
-    document.querySelector(".scfives").innerHTML=`${Sumones(5)}`;
-    document.querySelector(".scsixs").innerHTML=`${Sumones(6)}`;
-    document.querySelector(".scchoice").innerHTML=`${choice(result)}`;
-    document.querySelector(".sclilstraight").innerHTML=`${littleStraight(result)}`;
-    document.querySelector(".scyacht").innerHTML=`${yacht(result)}`;
-    document.querySelector(".scbigstraight").innerHTML=`${bigStraight(result)}`;
-    document.querySelector(".scfullhouse").innerHTML=`${fullhouse(result)}`
-    document.querySelector(".scfourofakind").innerHTML=`${forofakind(result)}`;   
-    }
-    clickcountRoll +=1;
-})
+    clickcountbtn ++;
+    if(clickcountbtn == 12){
+    endmention();
+}
 },{ once : true })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
