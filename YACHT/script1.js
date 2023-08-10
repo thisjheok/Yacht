@@ -193,6 +193,7 @@ let clickcountRoll = 0;
 document.querySelector(".roll").addEventListener("click",function(){
     
     if(clickcountRoll<3){
+    document.querySelector(".keep").innerHTML="choose what to keep";
     document.querySelector(".lastkeep").innerHTML=`last keep chance: ${2-clickcountRoll}`;
     //주사위 랜덤 부여
     let lastdice = dicelist.filter(x =>!changedice.includes(x));
@@ -229,6 +230,7 @@ document.querySelector(".roll").addEventListener("click",function(){
 
 function endmention(){
     alert("end!");
+    location.replace(location.href);
 }
 
 
@@ -246,6 +248,7 @@ document.querySelector(".ones").addEventListener("click",function(){
     clickcountDice3 = 0;
     clickcountDice4 = 0;
     clickcountDice5 = 0;
+    changedice = [];
     for(var i=0;i<5;i++){
     document.querySelectorAll(".dice")[i].style.backgroundColor = 'white';
     }
@@ -265,6 +268,7 @@ document.querySelector(".twos").addEventListener("click",function(){
     clickcountDice3 = 0;
     clickcountDice4 = 0;
     clickcountDice5 = 0;
+    changedice = [];
     for(var i=0;i<5;i++){
     document.querySelectorAll(".dice")[i].style.backgroundColor = 'white';
     }
@@ -284,6 +288,7 @@ document.querySelector(".threes").addEventListener("click",function(){
     clickcountDice3 = 0;
     clickcountDice4 = 0;
     clickcountDice5 = 0;
+    changedice = [];
     for(var i=0;i<5;i++){
     document.querySelectorAll(".dice")[i].style.backgroundColor = 'white';
     }
@@ -303,6 +308,7 @@ document.querySelector(".fours").addEventListener("click",function(){
     clickcountDice3 = 0;
     clickcountDice4 = 0;
     clickcountDice5 = 0;
+    changedice = [];
     for(var i=0;i<5;i++){
     document.querySelectorAll(".dice")[i].style.backgroundColor = 'white';
     }
@@ -322,6 +328,7 @@ document.querySelector(".fives").addEventListener("click",function(){
     clickcountDice3 = 0;
     clickcountDice4 = 0;
     clickcountDice5 = 0;
+    changedice = [];
     for(var i=0;i<5;i++){
     document.querySelectorAll(".dice")[i].style.backgroundColor = 'white';
     }
@@ -341,6 +348,7 @@ document.querySelector(".sixs").addEventListener("click",function(){
     clickcountDice3 = 0;
     clickcountDice4 = 0;
     clickcountDice5 = 0;
+    changedice = [];
     for(var i=0;i<5;i++){
     document.querySelectorAll(".dice")[i].style.backgroundColor = 'white';
     }
@@ -360,6 +368,7 @@ document.querySelector(".choice").addEventListener("click",function(){
     clickcountDice3 = 0;
     clickcountDice4 = 0;
     clickcountDice5 = 0;
+    changedice = [];
     for(var i=0;i<5;i++){
     document.querySelectorAll(".dice")[i].style.backgroundColor = 'white';
     }
@@ -380,6 +389,7 @@ document.querySelector(".lilstraight").addEventListener("click",function(){
     clickcountDice3 = 0;
     clickcountDice4 = 0;
     clickcountDice5 = 0;
+    changedice = [];
     for(var i=0;i<5;i++){
     document.querySelectorAll(".dice")[i].style.backgroundColor = 'white';
     }
@@ -400,6 +410,7 @@ document.querySelector(".bigstraight").addEventListener("click",function(){
     clickcountDice3 = 0;
     clickcountDice4 = 0;
     clickcountDice5 = 0;
+    changedice = [];
     for(var i=0;i<5;i++){
     document.querySelectorAll(".dice")[i].style.backgroundColor = 'white';
     }
@@ -420,6 +431,7 @@ document.querySelector(".fullhouse").addEventListener("click",function(){
     clickcountDice3 = 0;
     clickcountDice4 = 0;
     clickcountDice5 = 0;
+    changedice = [];
     for(var i=0;i<5;i++){
     document.querySelectorAll(".dice")[i].style.backgroundColor = 'white';
     }
@@ -440,6 +452,7 @@ document.querySelector(".fourofakind").addEventListener("click",function(){
     clickcountDice3 = 0;
     clickcountDice4 = 0;
     clickcountDice5 = 0;
+    changedice = [];
     for(var i=0;i<5;i++){
     document.querySelectorAll(".dice")[i].style.backgroundColor = 'white';
     }
@@ -460,6 +473,7 @@ document.querySelector(".yacht").addEventListener("click",function(){
     clickcountDice3 = 0;
     clickcountDice4 = 0;
     clickcountDice5 = 0;
+    changedice = [];
     for(var i=0;i<5;i++){
     document.querySelectorAll(".dice")[i].style.backgroundColor = 'white';
     }
